@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block 'main' %}
+
+ <!-- Cart start-->
+ <div class="row mt-5">
+    <div class="col-md-9">
+        {% for x in data %}
+        {% if forloop.counter == 1 %}
+        <h5 class ="bg-info p-2">Customer Details</h5>
+        <p><strong>Name:</strong>&nbsp;&nbsp;{{x.uid.username}}</p>
+       <!--<p><strong>Mobile:</strong>&nbsp;&nbsp;9865327485</p>--> 
+        <p></p><strong>Email:</strong>&nbsp;&nbsp;{{x.uid.email}}</p>
+        {% endif %}
+        {% endfor %} 
+         <!-- Customer and product details-->
+         {% for x in data %}
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{x.pid.pimage.url}}" width="100%">
+            </div>
+            <div class="col-md-8">
+                <p><strong>Product Name:</strong>&nbsp; &nbsp; {{x.pid.name}}</p>
+                <p><strong>Price:</strong>&nbsp; &nbsp; Rs.{{x.pid.price}}</p>
+                {% if x.pid.cat == 1 %}
+                <p><strong>Category:</strong>&nbsp; &nbsp; Mobile</p>
+                {% elif x.pid.cat == 2 %}
+                <p><strong>Category:</strong>&nbsp; &nbsp; Shoes</p>
+                {% else %}
+                <p><strong>Category:</strong>&nbsp; &nbsp; Clothes</p>
+                {% endif %}
+                <!--<p><strong>Category:</strong>&nbsp; &nbsp; {{x.pid.cat}}</p> -->
+                <p><strong>Product Description:</strong>&nbsp; &nbsp; {{x.pid.pdetails}}</p><br>
+               <!-- <p>
+                    <strong>QTY:</strong>
+                    <button class="btn btn-danger">-</button>
+                    <input type="number" value="{{x.qty}}">
+                    <button class="btn btn-success">+</button>
+                </p>-->
+                <a href="/remove/{{x.id}}"><button class="bg-danger">Remove</button></a>
+               </div>
+        </div>
+        {% endfor %}
+    </div>
+
+       <!-- total amount section-->
+       <div class="col-md-3">
+        <h5 class="bg-info p-2">Total Amount</h5>
+        <p><strong>Total({{n}} items):</strong>Rs.{{total}}</p>
+        <hr>
+        <p><strong>Total Amount:</strong>Rs.{{total}}</p>
+        <a href="/makepayment"><button class="bg-danger">Make Payment</button></a>
+       </div>
+
+</div>  
+
+
+
+
+<!-- main end-->
+
+{% endblock 'main' %}
